@@ -1,5 +1,5 @@
 module.exports = {
-	entityName: 'person',
+	name: 'person',
 	validation: require('./validation'),
 	fields: [
 		{

@@ -1,5 +1,5 @@
 module.exports = {
-	entityName: 'order',
+	name: 'order',
 	fields: [
 		{
 			field: 'id',
