@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 function createTable(entity) {
 	return new Promise((resolve, reject) => {
-		const { entityName, fields } = entity;
+		const { name, fields } = entity;
 		const makeColumns = table => {
 			fields.forEach(({ field, type }) => {
 				const fildName = _.snakeCase(field);
@@ -16,9 +16,9 @@ function createTable(entity) {
 				if (type === 'datetime') table.timestamp(fildName);
 			});
 		};
-		const sendMessage = console.log(`CREATED TABLE ${entityName.toUpperCase()}`);
+		const sendMessage = console.log(`CREATED TABLE ${name.toUpperCase()}`);
 		knex.schema
-			.createTable(entityName, makeColumns)
+			.createTable(name, makeColumns)
 			.then(sendMessage)
 			.catch(reject)
 			.finally(resolve);

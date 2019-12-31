@@ -1,4 +1,5 @@
 const fs = require('fs');
+const _ = require('lodash');
 
 module.exports = {
 	getEntities() {
@@ -10,6 +11,6 @@ module.exports = {
 	},
 	getValidation(entity) {
 		const entDef = require(`./${entity}`);
-		return entDef.validation.mandatory;
+		return _.get(entDef, 'validation.mandatory') || {};
 	}
 };
