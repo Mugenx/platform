@@ -1,16 +1,18 @@
+require('dotenv').config();
 const fs = require('fs');
 const _ = require('lodash');
+const APP_CONFIG = process.env.APP_CONFIG;
 
 module.exports = {
 	getEntities() {
-		const getEntity = entity => require(`./${entity}`);
+		const getEntity = ent => require(`${APP_CONFIG}/entities/${ent}`);
 		return fs
-			.readdirSync(__dirname)
+			.readdirSync(`${APP_CONFIG}/entities`)
 			.filter(data => data !== 'index.js')
 			.map(getEntity);
 	},
-	getValidation(entity) {
-		const entDef = require(`./${entity}`);
+	getValidation(ent) {
+		const entDef = require(`${APP_CONFIG}/entities/${ent}`);
 		return _.get(entDef, 'validation.mandatory') || {};
 	}
 };
